@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { type } from '@testing-library/user-event/dist/type';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
