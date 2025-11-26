@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 function App() {
-  const state = useState(0)
-  console.log(state)
+  const [count, setCount] = useState(5)
+  console.log(count)
+  console.log(setCount)
   return (
     <div className="App">
       {/* <h1>{likes}</h1>
