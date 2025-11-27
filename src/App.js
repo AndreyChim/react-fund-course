@@ -5,15 +5,18 @@ import './styles/App.css'
 import PostItem from "./components/PostItem";
 
 function App() {
-  const [value, setValue] = useState('text to input')
-  
+  const [posts, setPosts] = useState([
+    {id:1, title: 'Javascript', body: 'Description'},
+    {id:2, title: 'Javascript 2', body: 'Description'},
+    {id:3, title: 'Javascript 3', body: 'Description'}
+  ])
   return (
     <div className="App">
-      <PostItem/>
-      <PostItem/>
-      <PostItem/>
+      {posts.map(post =>
+      <div>POST</div>
+      )}
     </div>
   );
 }
 
-export default App;
+export default App; 
