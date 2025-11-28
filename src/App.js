@@ -10,9 +10,8 @@ function App() {
   ])
   return (
     <div className="App">
-      {/* <PostItem/> */}
-      <PostItem value={"2222"} item={{title: 0}} number={1} />
-      {/* to console: props {value: '2222', item: {…}, number: 1} */}
+      <PostItem id={1} title={'Javascript'} body={'Description'} />
+      {/* to console: props {id: 1, title: 'Javascript', body: 'Description'}} */}
     </div>
 
     
