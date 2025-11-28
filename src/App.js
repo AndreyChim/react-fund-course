@@ -10,11 +10,11 @@ function App() {
   ])
   return (
     <div className="App">
-      {/* <PostItem id={1} title={'Javascript'} body={'Description'} /> */}
-      {/* to console: props {id: 1, title: 'Javascript', body: 'Description'}} */}
-      <PostItem post={{ id: 1, title: 'Javascript', body: 'Description'}} /> 
-      {/*We add a post props */}
-      {/* props post: {id: 1, title: 'Javascript', body: 'Description'} */}
+      <PostItem post={{ id: 1, title: 'Javascript', body: 'Description'}} /> {/* We can pass any data to the component as props. */}
+      <PostItem post={{ id: 2, title: 'Javascript', body: 'Description'}} /> 
+      <PostItem post={{ id: 3, title: 'Javascript', body: 'Description'}} /> 
+      <PostItem post={{ id: 4, title: 'Javascript', body: 'Description'}} /> 
+      <PostItem post={{ id: 5, title: 'Javascript', body: 'Description'}} /> 
     </div>
 
     

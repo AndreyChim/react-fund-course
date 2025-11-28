@@ -5,9 +5,9 @@ const PostItem = (props) => {  // the component can accept some input data, prop
   return (
     <div className="post">
       <div className="post__content">
-        {/* <strong>{props.post.id}. {props.post.title} </strong> */}
+         <strong>{props.post.id}. {props.post.title} </strong>  {/* we access the object's field to props name post: props.post.id*/}
         <div>
-          {/* {props.post.body} */}
+          {props.post.body}
         </div>
       </div>
       <div className="post__btns">
