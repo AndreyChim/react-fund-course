@@ -15,10 +15,14 @@ function App() {
   // We call the map function on the list of posts 
   // We pass a callback to the map function, where we transform each post object into a React element.
   
+  // <PostItem post={post} />
+  // becomes:
+  {/* <PostItem post={{id: 1, title: 'Javascript', body: 'Description'}} /> */}
+
   return (
     <div className="App">
        {posts.map(post =>  
-       <div>POST</div>                      
+       <PostItem post={post}/>
        )}
        </div>
   );
