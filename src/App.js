@@ -18,11 +18,12 @@ function App() {
   // <PostItem post={post} />
   // becomes:
   {/* <PostItem post={{id: 1, title: 'Javascript', body: 'Description'}} /> */}
+  // Keys allow React algorithms to render more efficiently and redraw not the entire list, but only those elements that have changed.
 
   return (
     <div className="App">
        {posts.map(post =>  
-       <PostItem post={post}/>
+       <PostItem post={post} key={post.id}/>
        )}
        </div>
   );
