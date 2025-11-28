@@ -6,18 +6,21 @@ import PostItem from "./components/PostItem";
 
 function App() {
   const [posts, setPosts] = useState([
-    
+    { id: 1, title: 'Javascript', body: 'Description'}, // pass an array of objects as the default value
+    { id: 2, title: 'Javascript 2', body: 'Description'}, // object structure like props
+    { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
+
+  // We need to convert an array of regular objects into an array of React elements
+  // We call the map function on the list of posts 
+  // We pass a callback to the map function, where we transform each post object into a React element.
+  
   return (
     <div className="App">
-      <PostItem post={{ id: 1, title: 'Javascript', body: 'Description'}} /> {/* We can pass any data to the component as props. */}
-      <PostItem post={{ id: 2, title: 'Javascript', body: 'Description'}} /> 
-      <PostItem post={{ id: 3, title: 'Javascript', body: 'Description'}} /> 
-      <PostItem post={{ id: 4, title: 'Javascript', body: 'Description'}} /> 
-      <PostItem post={{ id: 5, title: 'Javascript', body: 'Description'}} /> 
-    </div>
-
-    
+       {posts.map(post =>  
+       <div>POST</div>                      
+       )}
+       </div>
   );
 }
 
