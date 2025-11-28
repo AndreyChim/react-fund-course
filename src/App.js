@@ -6,19 +6,13 @@ import PostItem from "./components/PostItem";
 
 function App() {
   const [posts, setPosts] = useState([
-    {id:1, title: 'Javascript', body: 'Description'},
-    {id:2, title: 'Javascript 2', body: 'Description'},
-    {id:3, title: 'Javascript 3', body: 'Description'}
+    
   ])
   return (
     <div className="App">
-      {posts.map(post =>
-      <div>POST</div>
-      )}
-
-      <div>
-      <Counter/>
-      </div>
+      {/* <PostItem/> */}
+      <PostItem value={"2222"} item={{title: 0}} number={1} />
+      {/* to console: props {value: '2222', item: {…}, number: 1} */}
     </div>
 
     

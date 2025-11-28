@@ -6,8 +6,8 @@ const Counter = function () {
 
   const [count, setCount] = useState(0) // const count destructuring to const [count, setCount]
                                           
-      console.log(count)                  // we see to console a count value
-      console.log(setCount)               // we see to console a setCount function
+      // console.log(count)                  // we see to console a count value
+      // console.log(setCount)               // we see to console a setCount function
 
         function increment() { 
             setCount(count + 1) // we don't change count value directly count += 1 but by built-in function, e.g. setCount
