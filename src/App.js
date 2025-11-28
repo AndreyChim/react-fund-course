@@ -15,7 +15,13 @@ function App() {
       {posts.map(post =>
       <div>POST</div>
       )}
+
+      <div>
+      <Counter/>
+      </div>
     </div>
+
+    
   );
 }
 
