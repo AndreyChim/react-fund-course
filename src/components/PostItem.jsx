@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PostItem = (props) => {  // the component can accept some input data, props
-  console.log('props', props)  // to console: props {} i; {} - a function argument into which we can pass something from the outside
+  // console.log('props', props)  // to console: props {} i; {} - a function argument into which we can pass something from the outside
   return (
     <div className="post">
       <div className="post__content">
@@ -16,5 +16,12 @@ const PostItem = (props) => {  // the component can accept some input data, prop
     </div>
   )
 }
+
+// const PostItem = ({ post }) => {  // Destructure props
+//   return (
+//     <div className="post">
+//       <div className="post__content">
+//         <strong>{post.id}. {post.title}</strong>  
+//         <div>{post.body}</div>
 
 export default PostItem
