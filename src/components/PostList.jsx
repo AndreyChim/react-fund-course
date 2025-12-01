@@ -2,28 +2,28 @@
 import React from 'react'
 import PostItem from './PostItem'
 
-// const PostList = ({posts}) => {
+const PostList = ({posts, title}) => {
   
   // useEffect(() => {
   //   console.log('Posts in PostList:', posts)
   // }, [posts]) // This will log whenever posts changes
 
-    const PostList = (props) => {
+    // const PostList = (props) => {
     // Check the entire props object
-    console.log('Full props object:', props)
+    // console.log('Full props object:', props)
     
     // Check specific properties of props
-    console.log('props.posts', props.posts)
-    console.log('0 item of array', props.posts[0])
-    console.log('Type of props:', typeof props)
-    console.log('Keys in props:', Object.keys(props))
+    // console.log('props.posts', props.posts)
+    // console.log('0 item of array', props.posts[0])
+    // console.log('Type of props:', typeof props)
+    // console.log('Keys in props:', Object.keys(props))
 
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>
-          List of posts
-        </h1>
-       {props.posts.map(post =>  
+          {title}
+      </h1>
+       {posts.map(post =>  
           <PostItem post={post} key={post.id}/>
        )}
     </div>
