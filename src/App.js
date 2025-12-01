@@ -11,11 +11,7 @@ function App() {
     { id: 2, title: 'Javascript 2', body: 'Description'}, // object structure like props
     { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
-  const [posts2, setPosts2] = useState([
-    { id: 1, title: 'Ruby', body: 'Description'}, // pass an array of objects as the default value
-    { id: 2, title: 'Ruby 2', body: 'Description'}, // object structure like props
-    { id: 3, title: 'Ruby 3', body: 'Description'}
-  ])
+  
   // Check original posts array
   // console.log('Posts in App:', posts)
 
@@ -30,8 +26,12 @@ function App() {
 
   return (
     <div className="App">
-       <PostList posts={posts} title="List of posts 1"/>
-       <PostList posts={posts2} title="List of posts 2"/>
+      <form>
+          <input type="text" placeholder="Name of post"/>
+          <input type="text" placeholder="Description of post"/>
+          <button>Create a post</button>
+      </form>
+      <PostList posts={posts} title="List of posts 1"/>
     </div>
   );
 }
