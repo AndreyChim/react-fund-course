@@ -5,6 +5,7 @@ const MyButton = ({children, ...props}) => {
   
   console.log('children:', children)
   console.log('props:', props)
+  console.log('children, ...props:', {children, ...props})
   return (
     <button {...props} className={classes.myBtn}>
       {children}
