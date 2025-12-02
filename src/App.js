@@ -30,7 +30,7 @@ function App() {
       <form>
           <input type="text" placeholder="Name of post"/>
           <input type="text" placeholder="Description of post"/>
-          <MyButton>Create a post</MyButton>
+          <MyButton disabled>Create a post</MyButton>
       </form>
       <PostList posts={posts} title="List of posts 1"/>
     </div>
