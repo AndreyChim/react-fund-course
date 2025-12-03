@@ -14,7 +14,7 @@ function App() {
     { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
   
-  const [title, setTitle] = useState('test')
+  const [title, setTitle] = useState('')
   console.log('title:', title, 'setTitle:', setTitle)
   console.log('MyInput Props:', {
     value: title,
@@ -26,8 +26,9 @@ function App() {
     checked: undefined,   // Not applicable for text input
     disabled: undefined   // You're not passing disabled
   })
-  const addNewPost = () => {
-
+  const addNewPost = (e) => {
+    e.preventDefault()
+    console.log(title)
   }
 
   return (
@@ -54,7 +55,7 @@ function App() {
             placeholder="Name of post"
         />
           <MyInput type="text" placeholder="Description of post"/>
-          <MyButton onClick={addNewPost}>Create a post</MyButton>
+          <MyButton type="submit" onClick={addNewPost}>Create a post</MyButton>
       </form>
       <PostList posts={posts} title="List of posts 1"/>
     </div>
