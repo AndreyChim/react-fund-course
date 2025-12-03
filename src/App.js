@@ -14,42 +14,44 @@ function App() {
     { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
   
-  // Check original posts array
-  // console.log('Posts in App:', posts)
+  const [title, setTitle] = useState('test')
+  console.log('title:', title, 'setTitle:', setTitle)
+  console.log('MyInput Props:', {
+    value: title,
+    type: 'text',
+    placeholder: 'Name of post',
+    name: undefined,  // You're not passing name
+    id: undefined,    // You're not passing id
+    className: undefined, // You're not passing className
+    checked: undefined,   // Not applicable for text input
+    disabled: undefined   // You're not passing disabled
+  })
+  const addNewPost = () => {
 
-  // We need to convert an array of regular objects into an array of React elements
-  // We call the map function on the list of posts 
-  // We pass a callback to the map function, where we transform each post object into a React element.
-  
-  // <PostItem post={post} />
-  // becomes:
-  /* <PostItem post={{id: 1, title: 'Javascript', body: 'Description'}} /> */
-  // Keys allow React algorithms to render more efficiently and redraw not the entire list, but only those elements that have changed.
+  }
 
   return (
     <div className="App">
       <form>
-          <MyInput type="text" placeholder="Name of post"/>
+        {/*Controlled component*/}
+        <MyInput
+            value={title} 
+            onChange={e => {
+                console.log('Event fired!');
+                console.log('Input value:', e.target.value);
+                console.log('Previous title:', title);
+                setTitle(e.target.value);
+                console.log('New title will be e.target.value:', e.target.value);
+            }}
+            type="text"
+            placeholder="Name of post"
+        />
           <MyInput type="text" placeholder="Description of post"/>
-          <MyButton>Create a post</MyButton>
+          <MyButton onClick={addNewPost}>Create a post</MyButton>
       </form>
       <PostList posts={posts} title="List of posts 1"/>
     </div>
   );
 }
-
-// When React sees this JSX:
-/* <PostList posts={posts}/> */
-
-// It essentially calls:
-// React.createElement(PostList, { posts: posts })
-
-// Which creates a React element with:
-// {
-//   type: PostList,
-//   props: {
-//     posts: postsArray  // The actual array from App's state
-//   }
-// }
 
 export default App; 
