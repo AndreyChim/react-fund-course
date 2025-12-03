@@ -38,10 +38,17 @@ function App() {
             value={title} 
             onChange={e => {
                 console.log('Event fired!');
+                console.log('Type of e:', typeof e);
+                console.log('Is e an object?', e && typeof e === 'object');
+                console.log('All e properties, Object.keys(e):', Object.keys(e));
                 console.log('Input value:', e.target.value);
                 console.log('Previous title:', title);
-                setTitle(e.target.value);
-                console.log('New title will be e.target.value:', e.target.value);
+                console.log('Full event object:', e);
+                console.log('Input value:', e.target.value);
+                console.log('Input type:', e.target.type);
+                console.log('Input placeholder:', e.target.placeholder);
+                console.log('Event type:', e.type);
+                setTitle(e.target.value);    
             }}
             type="text"
             placeholder="Name of post"
