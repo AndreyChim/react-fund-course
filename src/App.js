@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css'
@@ -29,7 +29,13 @@ function App() {
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title)
+    console.log(bodyInputRef.current.value)
+    console.log(bodyInputRef.current)
+    console.log(bodyInputRef.current.type)
+    console.log(bodyInputRef.current.placeholder)
   }
+
+  const bodyInputRef = useRef();
 
   return (
     <div className="App">
@@ -54,7 +60,11 @@ function App() {
             type="text"
             placeholder="Name of post"
         />
-          <MyInput type="text" placeholder="Description of post"/>
+          <MyInput
+              ref={bodyInputRef}
+              type="text"
+              placeholder="Description of post"
+          />
           <MyButton type="submit" onClick={addNewPost}>Create a post</MyButton>
       </form>
       <PostList posts={posts} title="List of posts 1"/>
