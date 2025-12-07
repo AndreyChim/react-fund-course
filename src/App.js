@@ -15,6 +15,8 @@ function App() {
   ])
   
   const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')
+
   console.log('title:', title, 'setTitle:', setTitle)
   console.log('MyInput Props:', {
     value: title,
@@ -28,15 +30,19 @@ function App() {
   })
   const addNewPost = (e) => {
     e.preventDefault()
-    console.log(title)
-    console.log('console.log(bodyInputRef.current:', bodyInputRef.current.value)
-    console.log('bodyInputRef.current:', bodyInputRef.current)
-    console.log('bodyInputRef.current.type:', bodyInputRef.current.type)
-    console.log('bodyInputRef.current.placeholder:', bodyInputRef.current.placeholder)
-    console.log('bodyInputRef.current.class:', bodyInputRef.current.className)
+    const newPost = {
+      id: Date.now(),
+      title,
+      body
+    }
+    setPosts([...posts, newPost])
+    // The created object is added to the posts array.
+    // We don't change the state directly.
+    // We call the function setPosts and pass it a new array, 
+    // where we expand the old array with existing posts 
+    // and add the new post to the end.
   }
 
-  const bodyInputRef = useRef();
 
   return (
     <div className="App">
@@ -61,9 +67,9 @@ function App() {
             type="text"
             placeholder="Name of post"
         />
-        {/*Uncontrolled component*/}
           <MyInput
-              ref={bodyInputRef}
+              value={body} 
+              onChange={e => setBody(e.target.value)}
               type="text"
               placeholder="Description of post"
           />
