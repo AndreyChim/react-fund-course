@@ -14,30 +14,12 @@ function App() {
     { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
   
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-
-  console.log('title:', title, 'setTitle:', setTitle)
-  console.log('MyInput Props:', {
-    value: title,
-    type: 'text',
-    placeholder: 'Name of post',
-    name: undefined,  // You're not passing name
-    id: undefined,    // You're not passing id
-    className: undefined, // You're not passing className
-    checked: undefined,   // Not applicable for text input
-    disabled: undefined   // You're not passing disabled
-  })
+  const [post, setPost] = useState({title: '', body: ''})
+  
   const addNewPost = (e) => {
     e.preventDefault()
-    const newPost = {
-      id: Date.now(),
-      title,
-      body
-    }
-    setPosts([...posts, newPost])
-    setTitle('')
-    setBody('')
+    setPosts([...posts, {...post, id: Date.now()}])
+    setPost({title: '', body: ''})
     // The created object is added to the posts array.
     // We don't change the state directly.
     // We call the function setPosts and pass it a new array, 
@@ -51,27 +33,14 @@ function App() {
       <form>
         {/*Controlled component*/}
         <MyInput
-            value={title} 
-            onChange={e => {
-                console.log('Event fired!');
-                console.log('Type of e:', typeof e);
-                console.log('Is e an object?', e && typeof e === 'object');
-                console.log('All e properties, Object.keys(e):', Object.keys(e));
-                console.log('Input value:', e.target.value);
-                console.log('Previous title:', title);
-                console.log('Full event object:', e);
-                console.log('Input value:', e.target.value);
-                console.log('Input type:', e.target.type);
-                console.log('Input placeholder:', e.target.placeholder);
-                console.log('Event type:', e.type);
-                setTitle(e.target.value);    
-            }}
+            value={post.title} 
+            onChange={e => setPost({...post, title: e.target.value})}
             type="text"
             placeholder="Name of post"
         />
           <MyInput
-              value={body} 
-              onChange={e => setBody(e.target.value)}
+              value={post.body} 
+              onChange={e => setPost({...post, body: e.target.value})}
               type="text"
               placeholder="Description of post"
           />
