@@ -36,6 +36,8 @@ function App() {
       body
     }
     setPosts([...posts, newPost])
+    setTitle('')
+    setBody('')
     // The created object is added to the posts array.
     // We don't change the state directly.
     // We call the function setPosts and pass it a new array, 
