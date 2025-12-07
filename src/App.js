@@ -29,10 +29,11 @@ function App() {
   const addNewPost = (e) => {
     e.preventDefault()
     console.log(title)
-    console.log(bodyInputRef.current.value)
-    console.log(bodyInputRef.current)
-    console.log(bodyInputRef.current.type)
-    console.log(bodyInputRef.current.placeholder)
+    console.log('console.log(bodyInputRef.current:', bodyInputRef.current.value)
+    console.log('bodyInputRef.current:', bodyInputRef.current)
+    console.log('bodyInputRef.current.type:', bodyInputRef.current.type)
+    console.log('bodyInputRef.current.placeholder:', bodyInputRef.current.placeholder)
+    console.log('bodyInputRef.current.class:', bodyInputRef.current.className)
   }
 
   const bodyInputRef = useRef();
@@ -60,6 +61,7 @@ function App() {
             type="text"
             placeholder="Name of post"
         />
+        {/*Uncontrolled component*/}
           <MyInput
               ref={bodyInputRef}
               type="text"
