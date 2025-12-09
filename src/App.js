@@ -7,6 +7,7 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
+import { useEffect } from "react";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -17,8 +18,12 @@ function App() {
   
   const createPost = (newPost) => {
       setPosts([...posts, newPost])
+    
+    console.log('old posts:', posts)
+    
   }
-
+    console.log('new posts:', posts)
+    
   return (
     <div className="App">
       <PostForm create={createPost}/>

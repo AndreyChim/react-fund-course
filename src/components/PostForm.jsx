@@ -11,15 +11,13 @@ const PostForm = ({create}) => {
         const newPost =  {
             ...post, id: Date.now()
         }
+        console.log('post:', post)
+        console.log('newPost:', newPost)
         create(newPost)
         setPost({title: '', body: ''})
-        // The created object is added to the posts array.
-        // We don't change the state directly.
-        // We call the function setPosts and pass it a new array, 
-        // where we expand the old array with existing posts 
-        // and add the new post to the end.
+        
       }
-
+    
   return (
     <form>
         {/*Controlled component*/}
