@@ -6,18 +6,28 @@ import MyButton from './UI/button/MyButton'
 const PostForm = ({create}) => {
     const [post, setPost] = useState({title: '', body: ''})
 
+    debugger;
     const addNewPost = (e) => {
         e.preventDefault()
+        debugger; // Check form state
+
         const newPost =  {
-            ...post, id: Date.now()
+            ...post, 
+            id: Date.now()
         }
+        debugger; // Check newPost object
         console.log('post:', post)
         console.log('newPost:', newPost)
+        console.log('create:', create)
+
         create(newPost)
+        debugger; 
         setPost({title: '', body: ''})
+        debugger; // Check form reset
         
       }
-    
+      debugger;
+      
   return (
     <form>
         {/*Controlled component*/}

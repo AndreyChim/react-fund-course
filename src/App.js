@@ -15,15 +15,27 @@ function App() {
     { id: 2, title: 'Javascript 2', body: 'Description'}, // object structure like props
     { id: 3, title: 'Javascript 3', body: 'Description'}
   ])
+  debugger;
   
   const createPost = (newPost) => {
-      setPosts([...posts, newPost])
+    debugger; // Pauses execution here
+    console.log('Before setPosts - posts:', posts);
+    console.log('Parameter newPost:', newPost);
     
-    console.log('old posts:', posts)
+    // const updatedPosts = [...posts, newPost];
+    // debugger; // Check updatedPosts
     
+    // setPosts(updatedPosts);
+    // debugger; // State hasn't updated yet (async)
+    
+    setPosts([...posts, newPost])
+    debugger;
+        
   }
+    // console.log('newPost:', newPost)
+    debugger;
     console.log('new posts:', posts)
-    
+
   return (
     <div className="App">
       <PostForm create={createPost}/>
