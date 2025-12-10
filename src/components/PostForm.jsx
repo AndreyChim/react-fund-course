@@ -20,7 +20,14 @@ const PostForm = ({create}) => {
         console.log('newPost:', newPost)
         console.log('create:', create)
 
-        create(newPost)
+        // we receive the create prop (which is the createPost function) 
+        // and use it in the addNewPost function
+
+        create(newPost) // THIS is where the parameter gets its value!
+
+        // Here we are calling the `create` prop, which is the `createPost` function
+        // from App.jsx, and passing the `newPost` object as an argument.
+
         debugger; 
         setPost({title: '', body: ''})
         debugger; // Check form reset
