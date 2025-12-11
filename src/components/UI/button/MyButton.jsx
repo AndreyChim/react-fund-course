@@ -13,15 +13,3 @@ const MyButton = ({children, ...props}) => {
 }
 
 export default MyButton
-
-// Desctructure
-// const MyButton = ({children, ...props}) => { 
-  // <button {...props} className={classes.myBtn}>
-  //       {children}
-  // </button>
-
-// Without desctructure
-// const MyButton = (props) => {
-//   <button className={classes.myBtn}>
-//     {props.children}
-//   </button>
