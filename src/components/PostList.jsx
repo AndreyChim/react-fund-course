@@ -2,7 +2,9 @@ import React from 'react'
 import PostItem from './PostItem'
 
 const PostList = ({posts, title, remove}) => {
-  
+  console.log('posts:', posts)
+  console.log('title:', title)
+  console.log('remove:', remove)
   return (
     <div>
       <h1 style={{textAlign: 'center'}}>
