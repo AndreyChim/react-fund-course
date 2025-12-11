@@ -1,4 +1,5 @@
 import React from 'react'
+import MyButton from './UI/button/MyButton'
 
 const PostItem = (props) => {  // the component can accept some input data, props
   // console.log('props', props)  // to console: props {} i; {} - a function argument into which we can pass something from the outside
@@ -11,7 +12,9 @@ const PostItem = (props) => {  // the component can accept some input data, prop
         </div>
       </div>
       <div className="post__btns">
-        <button>Delete</button>
+        <MyButton onClick={() => props.remove(props.post)}>
+          Delete
+        </MyButton>
       </div>
     </div>
   )

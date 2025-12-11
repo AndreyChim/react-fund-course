@@ -7,7 +7,6 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
-import { useEffect } from "react";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -36,13 +35,18 @@ function App() {
     debugger;
     console.log('new posts:', posts)
 
+    // We get the post from the child component
+    const removePost = (post) => {
+      setPosts(posts.filter(p => p.id !==post.id))
+    }
+
     // We pass the function createPost as a prop to the PostForm component
     // PostForm create={createPost}
     // Equivalent to: create={function(newPost) { setPosts([...posts, newPost]) }}
   return (
     <div className="App">
       <PostForm create={createPost}/>
-      <PostList posts={posts} title="List of posts 1"/>
+      <PostList remove={removePost} posts={posts} title="List of posts 1"/>
     </div>
   );
 }
