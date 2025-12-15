@@ -19,6 +19,8 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState('')
 
+  // useMemo will only recompute the memoized value when one of the deps has changed.
+
   const sortedPosts = useMemo(() => {
     console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
     if(selectedSort) {
@@ -26,6 +28,10 @@ function App() {
     }
     return posts 
   },    [selectedSort, posts])
+
+  const sortedAndSearchedPosts = useMemo(() => {
+      return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
+  }, [searchQuery, sortedPosts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -63,7 +69,7 @@ function App() {
       </div>
       {posts.length
           ?
-          <PostList remove={removePost} posts={sortedPosts} title="List of posts 1"/>
+          <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
           :
           <h1 style={{textAlign: "center"}}>
               No posts found!
