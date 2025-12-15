@@ -67,7 +67,7 @@ function App() {
               ]}
           />
       </div>
-      {posts.length
+      {sortedAndSearchedPosts.length
           ?
           <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
           :
