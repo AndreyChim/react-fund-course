@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css'
@@ -19,15 +19,13 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState('')
 
-  function getSortedPosts() {
-      console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
-      if(selectedSort) {
-          return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
-      }
-      return posts 
-  }
-
-  const sortedPosts = getSortedPosts()
+  const sortedPosts = useMemo(() => {
+    console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
+    if(selectedSort) {
+      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+    }
+    return posts 
+  },    [selectedSort, posts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
