@@ -8,6 +8,7 @@ import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/UI/select/MySelect";
+import PostFilter from "./components/PostFilter";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -51,22 +52,7 @@ function App() {
     <div className="App">
       <PostForm create={createPost}/>
       <hr style={{margin: '15px 0'}}/>
-      <div>
-          <MyInput
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search"
-          />
-          <MySelect
-              value={selectedSort}
-              onChange={sortPosts}
-              defaultValue="Sorting"
-              options={[
-                {value: 'title', name: 'By title'},
-                {value: 'body', name: 'By body'}
-              ]}
-          />
-      </div>
+      <PostFilter/>
       {sortedAndSearchedPosts.length
           ?
           <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
