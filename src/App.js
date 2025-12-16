@@ -16,23 +16,30 @@ function App() {
     { id: 2, title: 'gg', body: 'yy'}, 
     { id: 3, title: 'bb', body: 'cc'}
   ])
-  const [selectedSort, setSelectedSort] = useState('')
+  // const [selectedSort, setSelectedSort] = useState('')
+  // const [searchQuery, setSearchQuery] = useState('')
 
-  const [searchQuery, setSearchQuery] = useState('')
+  // const sortedPosts = useMemo(() => {
+  //   console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
+  //   if(selectedSort) {
+  //     return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+  //   }
+  //   return posts 
+  // },    [selectedSort, posts])
 
-  // useMemo will only recompute the memoized value when one of the deps has changed.
+  const [filter, setFilter] = useState({sort: '', query: ''})
 
   const sortedPosts = useMemo(() => {
     console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
-    if(selectedSort) {
-      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+    if(filter.sort) {
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
     }
     return posts 
-  },    [selectedSort, posts])
+  },    [filter.sort, posts])
 
   const sortedAndSearchedPosts = useMemo(() => {
-      return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
-  }, [searchQuery, sortedPosts])
+      return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+  }, [filter.query, sortedPosts])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -43,16 +50,19 @@ function App() {
     setPosts(posts.filter(p => p.id !==post.id))
   }
 
-  const sortPosts = (sort) => {
-      setSelectedSort(sort)
-      console.log('sort:', sort)
-  }
+  // const sortPosts = (sort) => {
+  //     setSelectedSort(sort)
+  //     console.log('sort:', sort)
+  // }
 
   return (
     <div className="App">
       <PostForm create={createPost}/>
       <hr style={{margin: '15px 0'}}/>
-      <PostFilter/>
+      <PostFilter
+          filter={filter}
+          setFilter={setFilter}
+      />
       {sortedAndSearchedPosts.length
           ?
           <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
