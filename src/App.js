@@ -1,94 +1,79 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
+import Counter from "./components/Counter";
+import ClassCounter from "./components/ClassCounter";
+import './styles/App.css'
+import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
+import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter";
 
 function App() {
-  const posts = [
+  const [posts, setPosts] = useState([
     { id: 1, title: 'aa', body: 'zz'}, 
     { id: 2, title: 'gg', body: 'yy'}, 
     { id: 3, title: 'bb', body: 'cc'}
-  ]
- 
-  // APPROACH 1: Single object state
+  ])
+  // const [selectedSort, setSelectedSort] = useState('')
+  // const [searchQuery, setSearchQuery] = useState('')
+
+  // const sortedPosts = useMemo(() => {
+  //   console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
+  //   if(selectedSort) {
+  //     return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+  //   }
+  //   return posts 
+  // },    [selectedSort, posts])
+
   const [filter, setFilter] = useState({sort: '', query: ''})
+
+  const sortedPosts = useMemo(() => {
+    console.log('THE sortedPosts FUNCTION HAS BEEN EXECUTED')
+    if(filter.sort) {
+      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
+    }
+    return posts 
+  },    [filter.sort, posts])
+
+  const sortedAndSearchedPosts = useMemo(() => {
+      return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+  }, [filter.query, sortedPosts])
+
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost])
+            
+  }
   
-  // APPROACH 2: Separate states  
-  const [selectedSort, setSelectedSort] = useState('')
-  const [query, setQuery] = useState('')
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !==post.id))
+  }
 
-  // Function to demonstrate both approaches
-  const logBothApproaches = (action, newSort, newQuery) => {
-    console.log(`\n=== ${action} ===`);
-    console.log('APPROACH 1 (Single Object):', {filter, newFilter: {sort: newSort, query: newQuery}});
-    console.log('APPROACH 2 (Separate):', {selectedSort, newSort, query, newQuery});
-  };
-
-  // Demo: Change sort (simulate dropdown selection)
-  const handleSortChange = (sortValue) => {
-    logBothApproaches('CHANGING SORT', sortValue, query);
-    
-    // Approach 1 update
-    setFilter({...filter, sort: sortValue});
-    
-    // Approach 2 update  
-    setSelectedSort(sortValue);
-  };
-
-  // Demo: Change query (simulate typing)
-  const handleQueryChange = (queryValue) => {
-    logBothApproaches('CHANGING QUERY', selectedSort, queryValue);
-    
-    // Approach 1 update
-    setFilter({...filter, query: queryValue});
-    
-    // Approach 2 update
-    setQuery(queryValue);
-  };
+  // const sortPosts = (sort) => {
+  //     setSelectedSort(sort)
+  //     console.log('sort:', sort)
+  // }
 
   return (
-    <div>
-      <h2>State Approach Comparison</h2>
+    <div className="App">
+      <PostForm create={createPost}/>
+      <hr style={{margin: '15px 0'}}/>
+      <PostFilter
+          filter={filter}
+          setFilter={setFilter}
+      />
+      {sortedAndSearchedPosts.length
+          ?
+          <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
+          :
+          <h1 style={{textAlign: "center"}}>
+              No posts found!
+          </h1>
+      }
       
-      <div style={{margin: '20px 0', padding: '10px', background: '#f0f0f0'}}>
-        <h3>Current State Values:</h3>
-        <p><strong>Approach 1 (filter):</strong> {JSON.stringify(filter)}</p>
-        <p><strong>Approach 2 separate:</strong> sort='{selectedSort}', query='{query}'</p>
-      </div>
-
-      <div style={{display: 'flex', gap: '20px'}}>
-        <div style={{flex: 1, padding: '10px', border: '1px solid #ccc'}}>
-          <h3>Approach 1: Single Object</h3>
-          <button onClick={() => handleSortChange('title')}>
-            Set Sort to 'title'
-          </button>
-          <button onClick={() => handleSortChange('body')}>
-            Set Sort to 'body'
-          </button>
-          <br/>
-          <input 
-            value={filter.query}
-            onChange={(e) => handleQueryChange(e.target.value)}
-            placeholder="Type for query..."
-          />
-        </div>
-
-        <div style={{flex: 1, padding: '10px', border: '1px solid #ccc'}}>
-          <h3>Approach 2: Separate States</h3>
-          <button onClick={() => setSelectedSort('title')}>
-            Set Sort to 'title'
-          </button>
-          <button onClick={() => setSelectedSort('body')}>
-            Set Sort to 'body'
-          </button>
-          <br/>
-          <input 
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type for query..."
-          />
-        </div>
-      </div>
     </div>
   );
 }
 
-export default App;
+export default App; 
