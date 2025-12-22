@@ -17,6 +17,11 @@ function App() {
   ])
   const [selectedSort, setSelectedSort] = useState('')
 
+    // Log initial state
+    console.log('=== INITIAL STATE ===');
+    console.log('selectedSort initial:', selectedSort);
+    console.log('posts initial:', posts);
+
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
             
@@ -27,10 +32,34 @@ function App() {
   }
 
   const sortPosts = (sort) => {
-      setSelectedSort(sort)
-      setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
-      console.log('sort:', sort)
+    console.log('\n=== STEP 1: sortPosts called ===');
+    console.log('sort parameter (from MySelect):', sort);
+    console.log('selectedSort BEFORE setSelectedSort:', selectedSort);
+    
+    setSelectedSort(sort)
+    
+    console.log('=== STEP 2: Sorting logic ===');
+    console.log('Current posts:', posts);
+    console.log('Sorting by field:', sort);
+    
+    const sortedPosts = [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
+    
+    console.log('Sorted posts:', sortedPosts);
+    console.log('Calling setPosts with sorted array...');
+    
+    setPosts(sortedPosts)
+    
+    // Note: selectedSort won't update here yet - setState is async!
+    console.log('Note: selectedSort value here is still:', selectedSort, 
+                '(setState is asynchronous)');
   }
+
+  // Add this useEffect to see the state after it updates
+  React.useEffect(() => {
+    console.log('\n=== STEP 3: State updated (useEffect) ===');
+    console.log('selectedSort AFTER update:', selectedSort);
+    console.log('posts AFTER update:', posts);
+  }, [selectedSort, posts])
 
   return (
     <div className="App">
