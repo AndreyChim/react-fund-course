@@ -19,6 +19,7 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
 
+  // sorted array
   const sortedPosts = useMemo(() => {
     console.log('The sortedPosts function has completed')
     if(selectedSort) {
@@ -26,6 +27,10 @@ function App() {
   }
     return posts;
   }, [selectedSort, posts])
+
+  const sortedAndSearchedPosts = useMemo(() => {
+      return sortedPosts.filter(post => post.title.includes(searchQuery))
+  }, [searchQuery, posts])
 
   const createPost = (newPost) =>
     setPosts([...posts, newPost])
@@ -68,7 +73,7 @@ function App() {
       </div>
       {posts.length
           ?
-          <PostList remove={removePost} posts={sortedPosts} title="List of posts 1"/>
+          <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
           :
           <h1 style={{textAlign: "center"}}>
               No posts found!
