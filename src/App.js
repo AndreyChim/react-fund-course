@@ -15,45 +15,24 @@ function App() {
     { id: 2, title: 'gg', body: 'yy'}, 
     { id: 3, title: 'bb', body: 'cc'}
   ])
+
   const [selectedSort, setSelectedSort] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
-    // Log initial state
-    console.log('=== INITIAL STATE ===');
-    console.log('selectedSort initial:', selectedSort);
-    console.log('posts initial:', posts);
+  const sortedPosts = [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
 
-  const createPost = (newPost) => {
+  const createPost = (newPost) =>
     setPosts([...posts, newPost])
             
-  }
-  
+  // we get the post from the child component
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !==post.id))
   }
 
   const sortPosts = (sort) => {
-    console.log('\n=== STEP 1: sortPosts called ===');
-    console.log('sort parameter (from MySelect):', sort);
-    console.log('selectedSort BEFORE setSelectedSort:', selectedSort);
-    
-    setSelectedSort(sort)
-    
-    console.log('=== STEP 2: Sorting logic ===');
-    console.log('Current posts:', posts);
-    console.log('Sorting by field:', sort);
-    
-    const sortedPosts = [...posts].sort((a, b) => a[sort].localeCompare(b[sort]))
-    
-    console.log('Sorted posts:', sortedPosts);
-    console.log('Calling setPosts with sorted array...');
-    
-    setPosts(sortedPosts)
-    
-    // Note: selectedSort won't update here yet - setState is async!
-    console.log('Note: selectedSort value here is still:', selectedSort, 
-                '(setState is asynchronous)');
+      setSelectedSort(sort)
   }
-
+    
   // Add this useEffect to see the state after it updates
   React.useEffect(() => {
     console.log('\n=== STEP 3: State updated (useEffect) ===');
@@ -66,6 +45,11 @@ function App() {
       <PostForm create={createPost}/>
       <hr style={{margin: '15px 0'}}/>
       <div>
+          <MyInput
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Search"
+          />
           <MySelect
               value={selectedSort}
               onChange={sortPosts}
@@ -78,7 +62,7 @@ function App() {
       </div>
       {posts.length
           ?
-          <PostList remove={removePost} posts={posts} title="List of posts 1"/>
+          <PostList remove={removePost} posts={sortedPosts} title="List of posts 1"/>
           :
           <h1 style={{textAlign: "center"}}>
               No posts found!
