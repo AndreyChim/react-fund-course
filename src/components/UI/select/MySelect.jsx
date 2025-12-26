@@ -2,9 +2,9 @@ import React from 'react'
 
 const MySelect = ({options, defaultValue, value, onChange}) => {
   // Log all parameters
-  console.log("All props MySelect:", { options, defaultValue, value, onChange });
-  console.log("Options array:", options);
-  console.log("Default value:", defaultValue);
+  // console.log("All props MySelect:", { options, defaultValue, value, onChange });
+  // console.log("Options array:", options);
+  // console.log("Default value:", defaultValue);
 
   return (
     <select

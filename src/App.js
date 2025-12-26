@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css'
@@ -19,15 +19,13 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
 
-  function getSortedPosts() {
-      console.log('The sortedPosts function has completed')
-      if(selectedSort) {
-          return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
-      }
-      return posts
+  const sortedPosts = useMemo(() => {
+    console.log('The sortedPosts function has completed')
+    if(selectedSort) {
+      return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
   }
-
-  const sortedPosts = getSortedPosts()
+    return posts;
+  }, [selectedSort, posts])
 
   const createPost = (newPost) =>
     setPosts([...posts, newPost])
@@ -42,11 +40,11 @@ function App() {
   }
     
   // Add this useEffect to see the state after it updates
-  React.useEffect(() => {
-    console.log('\n=== STEP 3: State updated (useEffect) ===');
-    console.log('selectedSort AFTER update:', selectedSort);
-    console.log('posts AFTER update:', posts);
-  }, [selectedSort, posts])
+  // React.useEffect(() => {
+  //   console.log('\n=== STEP 3: State updated (useEffect) ===');
+  //   console.log('selectedSort AFTER update:', selectedSort);
+  //   console.log('posts AFTER update:', posts);
+  // }, [selectedSort, posts])
 
   return (
     <div className="App">
