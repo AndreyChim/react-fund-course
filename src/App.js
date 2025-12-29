@@ -34,6 +34,7 @@ function App() {
       sort: '',    // Sorting field (title/body)
       query: ''    // Search text
   });
+  const [modal, setModal] = useState(false)
 
   // filter.sort accesses the sort property from the filter object
 
@@ -61,9 +62,10 @@ function App() {
     return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
 }, [filter.query, sortedPosts])
 
-  const createPost = (newPost) =>
+  const createPost = (newPost) => {
     setPosts([...posts, newPost])
-            
+    setModal(false)
+  }            
   // we get the post from the child component
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !==post.id))
@@ -84,7 +86,10 @@ function App() {
 
   return (
     <div className="App">
-      <MyModal>
+      <MyButton onClick={() => setModal(true)}>
+          Create a user
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
           <PostForm create={createPost}/>
       </MyModal>
       <hr style={{margin: '15px 0'}}/>
