@@ -9,6 +9,7 @@ import MyInput from "./components/UI/input/MyInput";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/UI/select/MySelect";
 import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/MyModal/MyModal";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -44,7 +45,7 @@ function App() {
       console.log('{...filter}:', {...filter})
       console.log("   {...filter} an object:", typeof {...filter});
       console.log("3. Are 'filter' and '{...filter}' the SAME object?");
-      console.log("   Using '===':", filter === {...filter}); 
+      // console.log("   Using '===':", filter === {...filter}); 
       console.log("   Using Object.is():", Object.is(filter, {...filter})); 
       return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
   }
@@ -83,7 +84,9 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost}/>
+      <MyModal>
+          <PostForm create={createPost}/>
+      </MyModal>
       <hr style={{margin: '15px 0'}}/>
       <PostFilter 
           filter={filter}
