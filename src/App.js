@@ -89,15 +89,7 @@ function App() {
           filter={filter}
           setFilter={setFilter}      
       />
-      {sortedAndSearchedPosts.length
-          ?
-          <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
-          :
-          <h1 style={{textAlign: "center"}}>
-              No posts found!
-          </h1>
-      }
-      
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
     </div>
   );
 }
