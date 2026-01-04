@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import PostItem from './PostItem'
-import { TransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const PostList = ({posts, title, remove}) => {
+
+  const nodeRef = useRef(null)
   
   if (!posts.length) {
       return (
@@ -21,6 +23,7 @@ const PostList = ({posts, title, remove}) => {
           {posts.map((post, index) =>
               <CSSTransition
                   key={post.id}
+                  nodeRef={nodeRef}
                   timeout={500}
                   classNames="post"
               >
