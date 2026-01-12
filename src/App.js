@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Counter from "./components/Counter";
 import ClassCounter from "./components/ClassCounter";
 import './styles/App.css'
@@ -15,25 +15,16 @@ import axios from "axios";
 
 function App() {
   const [posts, setPosts] = useState([])
-
-  // const [selectedSort, setSelectedSort] = useState('')
-  // const [searchQuery, setSearchQuery] = useState('')
-
-  // sorted array
-  // const sortedPosts = useMemo(() => {
-  //   console.log('The sortedPosts function has completed')
-  //   if(selectedSort) {
-  //     return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
-  // }
-  //   return posts;
-  // }, [selectedSort, posts])
-
   const [filter, setFilter] = useState({
-      sort: '',    // Sorting field (title/body)
-      query: ''    // Search text
+      sort: '',    
+      query: ''
   });
   const [modal, setModal] = useState(false)
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+
+  useEffect( () => {
+    console.log('Use Effect')
+  }, [])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -42,29 +33,15 @@ function App() {
 
   async function fetchPosts() {
       const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      console.log(response.data)
+      setPosts(response.data)
   }
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !==post.id))
   }
 
-  // we don't use this now
-
-  // const sortPosts = (sort) => {
-  //     setSelectedSort(sort)
-  // }
-    
-  // Add this useEffect to see the state after it updates
-  // React.useEffect(() => {
-  //   console.log('\n=== STEP 3: State updated (useEffect) ===');
-  //   console.log('selectedSort AFTER update:', selectedSort);
-  //   console.log('posts AFTER update:', posts);
-  // }, [selectedSort, posts])
-
   return (
     <div className="App">
-      <button onClick={fetchPosts}>Get posts</button>
       <MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
           Create a post
       </MyButton>
