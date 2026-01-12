@@ -24,7 +24,7 @@ function App() {
 
   useEffect( () => {
     console.log('Use Effect')
-  }, [])
+  }, [filter])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
