@@ -4,6 +4,10 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 const PostList = ({ posts, title, remove }) => {
   const nodeRefs = useRef({})
+
+  console.log('=== BEFORE PROCESSING ===')
+  console.log('1. posts array:', posts)
+  console.log('2. posts IDs only:', posts.map(p => p.id))
   
   posts.forEach(post => {
     
@@ -25,8 +29,31 @@ const PostList = ({ posts, title, remove }) => {
     
   })
 
+  console.log('3. nodeRefs.current BEFORE cleanup:', nodeRefs.current)
+  console.log('4. Keys in nodeRefs.current:', Object.keys(nodeRefs.current))
   console.log('nodeRefs.current:', nodeRefs.current)
+  console.log('=== CLEANUP PROCESS ===')
   
+  const currentIds = new Set(posts.map(p => p.id))
+
+  console.log('5. currentIds Set:', Array.from(currentIds))
+
+  Object.keys(nodeRefs.current).forEach(id => {
+    console.log(`   Checking ref for ID: ${id}`)
+    console.log(`   Type of id: ${typeof id}`) 
+    console.log(`   After parseInt: ${parseInt(id)}`)
+    console.log(`   Is in currentIds? ${currentIds.has(parseInt(id))}`)
+
+    if (!currentIds.has(parseInt(id))) {
+      console.log(`   🗑️  Deleting nodeRefs.current[${id}]`)
+      delete nodeRefs.current[id]
+    }
+  })
+
+  console.log('=== AFTER CLEANUP ===')
+  console.log('6. nodeRefs.current AFTER cleanup:', nodeRefs.current)
+  console.log('7. Keys remaining:', Object.keys(nodeRefs.current))
+
   if (!posts.length) {
     return (
       <h1 style={{ textAlign: "center" }}>
