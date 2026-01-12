@@ -23,8 +23,8 @@ function App() {
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
   useEffect( () => {
-    console.log('Use Effect')
-  }, [filter])
+    fetchPosts()
+  }, [])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
