@@ -13,11 +13,7 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'aa', body: 'zz'}, 
-    { id: 2, title: 'gg', body: 'yy'}, 
-    { id: 3, title: 'bb', body: 'cc'}
-  ])
+  const [posts, setPosts] = useState([])
 
   // const [selectedSort, setSelectedSort] = useState('')
   // const [searchQuery, setSearchQuery] = useState('')
