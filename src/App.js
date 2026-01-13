@@ -13,6 +13,7 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import { usePosts } from "./hooks/usePosts";
 import axios from "axios";
 import PostService from "./API/PostService";
+import Loader from "./components/UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -60,7 +61,7 @@ function App() {
           setFilter={setFilter}      
       />
       {isPostsLoading
-          ? <h1>Is loading...</h1>
+          ? <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader/></div>
           : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
       }
     </div>
