@@ -35,11 +35,12 @@ function App() {
 
   async function fetchPosts() {
     setIsPostsLoading(true)
-    const posts = await PostService.getAll();
-    setPosts(posts)
-    setIsPostsLoading(false)
-
-  }
+    setTimeout(async () => {
+      const posts = await PostService.getAll();
+      setPosts(posts)
+      setIsPostsLoading(false)
+    }, 1000)
+    }
 
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !==post.id))
