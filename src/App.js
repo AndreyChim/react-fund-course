@@ -78,8 +78,13 @@ function App() {
           : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
       }
       <div className="page__wrapper">
-          {pagesArray?.map(p =>
-              <span className="page">{p}</span>
+          {pagesArray.map(p =>
+              <span 
+                  onClick={() => setPage(p)}
+                  key={p} 
+                  className={page === p ? 'page page__current' : 'page'}>
+                {p}
+              </span>
           )}
       </div>
       
