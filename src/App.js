@@ -28,7 +28,11 @@ function App() {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
-  let pagesArray = getPagesArray(totalPages);
+  
+  const pagesArray = useMemo(() => {
+    console.log('Calculating pagesArray for totalPages:', totalPages);
+    return getPagesArray(totalPages);
+  }, [totalPages]);
 
   const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
     const response = await PostService.getAll(limit, page);
@@ -37,8 +41,9 @@ function App() {
     setTotalPages(getPageCount(totalCount, limit));
   })
 
+  console.log('pagesArray:', totalPages)
   console.log('totalPages:', totalPages)
-
+  
   useEffect( () => {
     fetchPosts()
   }, [])
@@ -72,9 +77,12 @@ function App() {
           ? <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader/></div>
           : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
       }
-      {pagesArray?.map(p =>
-          <MyButton>{p}</MyButton>
-      )}
+      <div className="page__wrapper">
+          {pagesArray?.map(p =>
+              <span className="page">{p}</span>
+          )}
+      </div>
+      
     </div>
   );
 }
