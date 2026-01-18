@@ -14,16 +14,12 @@ import { getPageCount } from "./utils/pages";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Posts from "./pages/Posts";
+import Navbar from "./components/UI/Navbar/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
-        <div className="navbar">
-            <div className="navbar_links">
-                <Link to="/about">About site</Link>
-                <Link to="/posts">Posts</Link>
-            </div>
-        </div>
+        <Navbar/>
         <Routes>
             <Route path='/about' element={<About />} />
             <Route path='/posts' element={<Posts />} />
