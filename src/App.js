@@ -11,7 +11,7 @@ import { useFetching } from "./hooks/useFetching";
 import { usePosts } from "./hooks/usePosts";
 import './styles/App.css';
 import { getPageCount } from "./utils/pages";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Posts from "./pages/Posts";
 
@@ -20,8 +20,8 @@ function App() {
     <BrowserRouter>
         <div className="navbar">
             <div className="navbar_links">
-                <a href="/about">About site</a>
-                <a href="/posts">Posts</a>
+                <Link to="/about">About site</Link>
+                <Link to="/posts">Posts</Link>
             </div>
         </div>
         <Routes>
