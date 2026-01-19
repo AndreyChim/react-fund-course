@@ -14,7 +14,7 @@ const PostItem = ({number, post, remove}) => {
         </div>
       </div>
       <div className="post__btns">
-        <MyButton onClick={() => router('/posts/${post.id}')}>
+        <MyButton onClick={() => router(`/posts/${post.id}`)}>
           Open
         </MyButton>
         <MyButton onClick={() => remove(post)}>

@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useFetching } from '../hooks/useFetching'
+import PostService from '../API/PostService'
+import Loader from '../components/UI/Loader/Loader'
 
 const PostIdPage = () => {
   const params = useParams()
-  console.log('params:', params)
-  console.log('params.id:', params.id)
+  const [post, setPost] = useState({})
+  const [fetchPostById, isLoading, error] = useFetching(async (id) => {
+    const response = await PostService.getById(id)
+    setPost(response.data)
+  })
+
+  useEffect(() => {
+    fetchPostById(params.id)
+  }, [])
+  
   return (
     <div>
-      <h1>You have opened the post page</h1>
-    </div>
+      <h1>You have opened the post page ID = {params.id}</h1>
+      {isLoading
+          ? <Loader/>  
+          : <div>{post.id}. {post.title}</div>
+      }
+      </div>
   )
 }
 
