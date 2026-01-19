@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 
 const PostIdPage = () => {
   const params = useParams()
-  console.log(params)
-  // console.log(params.id)
+  console.log('params:', params)
+  console.log('params.id:', params.id)
   return (
     <div>
       <h1>You have opened the post page</h1>
