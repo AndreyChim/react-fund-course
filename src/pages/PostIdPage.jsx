@@ -21,6 +21,9 @@ const PostIdPage = () => {
     fetchPostById(params.id)
     fetchComments(params.id)
   }, [])
+
+  console.log(post)
+  console.log(comments)
   
   return (
     <div>
