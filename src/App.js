@@ -17,13 +17,21 @@ import Posts from "./pages/Posts";
 import Error from "./pages/Error";
 import Navbar from "./components/UI/Navbar/Navbar";
 import AppRouter from "./components/AppRouter";
+import { AuthContext } from "./context";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false)
+
   return (
-    <BrowserRouter>
-        <Navbar/>
-        <AppRouter/>
-    </BrowserRouter>
+      <AuthContext.Provider value={{
+        isAuth,
+        setIsAuth
+      }}>
+        <BrowserRouter>
+            <Navbar/>
+            <AppRouter/>
+        </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
 

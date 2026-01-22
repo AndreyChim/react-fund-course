@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
 import { privateRoutes, publicRoutes } from '../router';
+import { AuthContext } from '../context';
 
 const AppRouter = () => {
+  const {isAuth} = useContext(AuthContext)
+  console.log(isAuth)
   return (
-      <Routes>
-          {privateRoutes.map(route => 
-              <Route
-                  key={route.path}    
-                  path={route.path}
-                  element={route.element}
-              />
-          )}
-          {publicRoutes.map(route => 
-              <Route
-                  key={route.path}    
-                  path={route.path}
-                  element={route.element}
-              />
-          )}
-          <Route path='*' element={<Navigate to='/posts' replace />} />
-      </Routes>
+      isAuth
+          ?
+          <Routes>
+            {privateRoutes.map(route => 
+                <Route
+                    key={route.path}    
+                    path={route.path}
+                    element={route.element}
+                />
+            )}
+                <Route path='*' element={<Navigate to='/posts' replace />} />
+          </Routes>
+          :
+          <Routes>
+             {publicRoutes.map(route => 
+                <Route
+                    key={route.path}    
+                    path={route.path}
+                    element={route.element}
+                />
+             )}
+             <Route path='*' element={<Navigate to='/login' replace />} />
+          </Routes>
+      
   )
 }
 
