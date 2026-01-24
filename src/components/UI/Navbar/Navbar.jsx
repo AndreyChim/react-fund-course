@@ -9,6 +9,7 @@ const Navbar = () => {
   const logout = () => {
     setIsAuth(false);
     localStorage.removeItem('auth')
+    console.log('localStorage Navbar:', localStorage)
   }
 
   return (
