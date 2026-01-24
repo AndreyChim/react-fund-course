@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PostService from "../API/PostService";
 import PostFilter from "../components/PostFilter";
 import PostForm from "../components/PostForm";
@@ -22,17 +22,30 @@ function Posts() {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+  const lastElement = useRef()
+  const observer = useRef()
+  console.log('lastElement:', lastElement)
      
   const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
     const response = await PostService.getAll(limit, page);
-    setPosts(response.data)
+    setPosts([...posts, ...response.data])
     const totalCount = response.headers['x-total-count']
     setTotalPages(getPageCount(totalCount, limit));
   })
 
   useEffect( () => {
-    fetchPosts(limit, page)
+      var callback = (entries, observer) => {
+          console.log('div in the visibility zone')
+    };
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(lastElement.current)
   }, [])
+
+
+
+  useEffect( () => {
+    fetchPosts(limit, page)
+  }, [page])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -44,8 +57,7 @@ function Posts() {
   }
 
   const changePage = (page) => {
-    setPage(page)
-    fetchPosts(limit, page)
+    setPage(page)    
   }
 
   return (
@@ -64,9 +76,10 @@ function Posts() {
       {postError &&
           <h1>Error ${postError}</h1>
       }
-      {isPostsLoading
-          ? <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader/></div>
-          : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title="List of posts 1"/>
+      <div ref={lastElement} style={{height: 20, background: 'red'}}/>
+      {isPostsLoading &&
+          <div style={{display: "flex", justifyContent: "center", marginTop: 50}}><Loader/></div>
       }
       <Pagination
           page={page} 

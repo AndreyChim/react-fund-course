@@ -6,12 +6,15 @@ import Loader from './UI/Loader/Loader';
 
 const AppRouter = () => {
   const {isAuth, isLoading} = useContext(AuthContext)
-  console.log('isAuth:', isAuth)
+  console.log('AppRouter render - isAuth:', isAuth, 'isLoading:', isLoading)
 
   if (isLoading) {
+        console.log('Showing loader, not making routing decisions yet')
         return <Loader/>
   }
-  
+
+  console.log('Making routing decision, isAuth:', isAuth, 'isLoading:', isLoading)
+
   return (
       isAuth
           ?
