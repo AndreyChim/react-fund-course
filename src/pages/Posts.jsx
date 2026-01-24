@@ -35,8 +35,9 @@ function Posts() {
 
   useEffect( () => {
       var callback = (entries, observer) => {
-        console.log('entries:', entries)
-          console.log('div in the visibility zone')
+          if (entries[0].isIntersecting) {
+              console.log('div in the visibility zone')
+          }          
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastElement.current)
