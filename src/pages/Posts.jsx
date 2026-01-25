@@ -33,21 +33,17 @@ function Posts() {
   })
 
   useEffect( () => {
+      if(isPostsLoading) return;
+      if(observer.current) observer.current.disconnect();
       var callback = (entries, observer) => {
-          if (entries[0].isIntersecting) {
-              console.log('div in the visibility zone')
-              console.log('entries:', entries)
-              console.log('entries[0]:', entries[0])
-              console.log('entries[0].target:', entries[0].target)
-              console.log('observer.current after creation:', observer.current)
-              console.log('lastElement:', lastElement)
-              console.log('lastElement.current:', lastElement.current)
-              console.log('Same object?', entries[0].target === lastElement.current);
+          if (entries[0].isIntersecting && page < totalPages) {
+              console.log(page)
+              setPage(page + 1)
           }          
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastElement.current)
-  }, [])
+  }, [isPostsLoading])
 
 
 
